@@ -2,6 +2,12 @@ name: aws-play
 runtime: nodejs
 description: A minimal AWS TypeScript Pulumi program
 config:
-  pulumi:tags:
-    value:
-      pulumi:template: aws-typescript
+  containerPort:
+    description: The port to expose on the container
+    default: 80
+  cpu:
+    description: The amount of CPU to allocate for the container
+    default: 512
+  memory:
+    description: The amount of memory to allocate for the container
+    default: 128

@@ -1,0 +1,3 @@
+setup:
+  - project: pullumi-aws-play
+    config: dev_personal

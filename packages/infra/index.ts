@@ -8,25 +8,30 @@ const cpu = config.getNumber("cpu") || 512;
 const memory = config.getNumber("memory") || 128;
 // Create a security group for the load balancer
 
-const loadBalancerSecurityGroup = new aws.ec2.SecurityGroup("loadBalancerSecurityGroup", {
-    ingress: [
-        {
-            protocol: "tcp",
-            fromPort: 80,
-            toPort: 80,
-            cidrBlocks: ["0.0.0.0/0"],
-        },
-        {
-            protocol: "tcp",
-            fromPort: 443,
-            toPort: 443,
-            cidrBlocks: ["0.0.0.0/0"],
-        },
-    ],
-});
 
+
+const vpc = new awsx.ec2.Vpc("vpc", {
+  assignGeneratedIpv6CidrBlock: true,
+},{});
 // // Associate the security group with the load balancer
 
+const loadBalancerSecurityGroup = new aws.ec2.SecurityGroup("loadBalancerSecurityGroup", {
+  ingress: [
+      {
+          protocol: "tcp",
+          fromPort: 80,
+          toPort: 80,
+          cidrBlocks: ["0.0.0.0/0"],
+      },
+      {
+          protocol: "tcp",
+          fromPort: 443,
+          toPort: 443,
+          cidrBlocks: ["0.0.0.0/0"],
+      },
+],
+  vpcId: vpc.vpcId,
+});
 
 // // An ECS cluster to deploy into
 // const cluster = new aws.ecs.Cluster("cluster", {});
@@ -34,6 +39,7 @@ const loadBalancerSecurityGroup = new aws.ec2.SecurityGroup("loadBalancerSecurit
 // // An ALB to serve the container endpoint to the internet
 // const loadbalancer = new awsx.lb.ApplicationLoadBalancer("loadbalancer", {
 //   securityGroups: [loadBalancerSecurityGroup.id],
+//   enableHttp2: true,
 // });
 
 

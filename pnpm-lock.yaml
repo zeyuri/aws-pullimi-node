@@ -134,13 +134,13 @@ importers:
   packages/infra:
     dependencies:
       '@pulumi/aws':
-        specifier: ^6.0.0
+        specifier: ^6.22.2
         version: 6.22.2
       '@pulumi/awsx':
-        specifier: ^2.0.2
+        specifier: ^2.5.0
         version: 2.5.0
       '@pulumi/pulumi':
-        specifier: ^3.0.0
+        specifier: ^3.106.0
         version: 3.106.0
     devDependencies:
       '@types/node':
@@ -953,7 +953,7 @@ packages:
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.10
-      '@types/node': 18.19.17
+      '@types/node': 20.10.6
     dev: false
 
   /@grpc/proto-loader@0.7.10:
@@ -1917,7 +1917,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 18.19.17
+      '@types/node': 20.10.6
       '@types/responselike': 1.0.3
     dev: false
 
@@ -1965,7 +1965,7 @@ packages:
   /@types/keyv@3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 18.19.17
+      '@types/node': 20.10.6
     dev: false
 
   /@types/minimatch@5.1.2:
@@ -1976,12 +1976,12 @@ packages:
     resolution: {integrity: sha512-SzyGKgwPzuWp2SHhlpXKzCX0pIOfcI4V2eF37nNBJOhwlegQ83omtVQ1XxZpDE06V/d6AQvfQdPfnw0tRC//Ng==}
     dependencies:
       undici-types: 5.26.5
+    dev: true
 
   /@types/node@20.10.6:
     resolution: {integrity: sha512-Vac8H+NlRNNlAmDfGUP7b5h/KA+AtWIzuXy0E6OyP8f1tCLYAtPvKRRDJjAPqhpCb0t6U2j7/xqAuLEebW2kiw==}
     dependencies:
       undici-types: 5.26.5
-    dev: true
 
   /@types/normalize-package-data@2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -2008,7 +2008,7 @@ packages:
   /@types/responselike@1.0.3:
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
     dependencies:
-      '@types/node': 18.19.17
+      '@types/node': 20.10.6
     dev: false
 
   /@types/scheduler@0.16.3:
@@ -5208,7 +5208,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 18.19.17
+      '@types/node': 20.10.6
       long: 5.2.3
     dev: false
 

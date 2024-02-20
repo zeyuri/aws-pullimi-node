@@ -11,33 +11,47 @@ const appCertificate = new aws.acm.Certificate("appCertificate", {
   validationMethod: "DNS",
 });
 
+const appCertificateValidationRecord = new aws.route53.Record(
+  "appCertificateValidationRecord",
+  {
+    name: appCertificate.domainValidationOptions[0].resourceRecordName,
+    type: appCertificate.domainValidationOptions[0].resourceRecordType,
+    zoneId: pwrDnsZone.zoneId,
+    records: [appCertificate.domainValidationOptions[0].resourceRecordValue],
+    ttl: 300,
+  },
+);
 
-const appCertificateValidationRecord = new aws.route53.Record("appCertificateValidationRecord", {
-  name: appCertificate.domainValidationOptions[0].resourceRecordName,
-  type: appCertificate.domainValidationOptions[0].resourceRecordType,
-  zoneId: pwrDnsZone.zoneId,
-  records: [appCertificate.domainValidationOptions[0].resourceRecordValue],
-  ttl: 300,
-});
+const certificateValidation = new aws.acm.CertificateValidation(
+  "certificateValidation",
+  {
+    certificateArn: appCertificate.arn,
+    validationRecordFqdns: [appCertificateValidationRecord.fqdn],
+  },
+);
 
-const certificateValidation = new aws.acm.CertificateValidation("certificateValidation", {
-  certificateArn: appCertificate.arn,
-  validationRecordFqdns: [appCertificateValidationRecord.fqdn],
-});
+// const privateSubnets: awsx.types.input.ec2.SubnetSpecArgs[] = Array(2).fill(0).map((_, index) => ({
+//   type: "Private",
+//   name: `private-subnet-${index}`,
+// }));
+// const publicSubnets: awsx.types.input.ec2.SubnetSpecArgs[] = Array(2).fill(0).map((_, index) => ({
+//   type: "Public",
+//   name: `public-subnet-${index}`,
+// }));
 
-const loadBalancerSecurityGroup = new aws.ec2.SecurityGroup("loadBalancerSecurityGroup", {
-  ingress: [
-      {
-          protocol: "tcp",
-          fromPort: 80,
-          toPort: 80,
-          cidrBlocks: ["0.0.0.0/0"],
-      },
-      {
-          protocol: "tcp",
-          fromPort: 443,
-          toPort: 443,
-          cidrBlocks: ["0.0.0.0/0"],
-      },
+// const subnetSpecs = [...privateSubnets, ...publicSubnets];
+
+// console.log(subnetSpecs);
+
+const vpc = new awsx.ec2.Vpc("mainVpc", {
+  cidrBlock: "10.0.0.0/16",
+  subnetStrategy: "Auto",
+  subnetSpecs: [
+    {
+      type: "Public",
+    },
+    {
+      type: "Private",
+    },
   ],
 });

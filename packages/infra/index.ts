@@ -30,28 +30,11 @@ const certificateValidation = new aws.acm.CertificateValidation(
   },
 );
 
-// const privateSubnets: awsx.types.input.ec2.SubnetSpecArgs[] = Array(2).fill(0).map((_, index) => ({
-//   type: "Private",
-//   name: `private-subnet-${index}`,
-// }));
-// const publicSubnets: awsx.types.input.ec2.SubnetSpecArgs[] = Array(2).fill(0).map((_, index) => ({
-//   type: "Public",
-//   name: `public-subnet-${index}`,
-// }));
-
-// const subnetSpecs = [...privateSubnets, ...publicSubnets];
-
-// console.log(subnetSpecs);
-
-const vpc = new awsx.ec2.Vpc("mainVpc", {
+const vpc = new awsx.ec2.Vpc("main-vpc", {
   cidrBlock: "10.0.0.0/16",
-  subnetStrategy: "Auto",
   subnetSpecs: [
     {
       type: "Public",
-    },
-    {
-      type: "Private",
     },
   ],
 });

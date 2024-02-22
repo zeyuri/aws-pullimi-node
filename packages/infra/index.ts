@@ -1,4 +1,3 @@
-import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 import * as awsx from "@pulumi/awsx";
 
@@ -117,7 +116,7 @@ const alb = new awsx.classic.lb.ApplicationLoadBalancer("net-lb", {
 });
 
 const targetGroup = alb.createTargetGroup("targetGroup", {
-  port: 80,
+  port: 3000,
   protocol: "HTTP",
   healthCheck: {
     path: "/health",

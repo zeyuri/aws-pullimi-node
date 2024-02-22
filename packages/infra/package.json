@@ -1,20 +1,20 @@
 {
-    "name": "infra",
-    "main": "index.ts",
-    "devDependencies": {
-        "@types/node": "^18",
-        "typescript": "^5.3.3"
-    },
-    "scripts": {
-        "build": "tsc",
-        "preview": "pulumi preview",
-        "up": "pulumi up",
-        "destroy": "pulumi destroy"
-    
-    },
-    "dependencies": {
-        "@pulumi/pulumi": "^3.106.0",
-        "@pulumi/aws": "^6.22.2",
-        "@pulumi/awsx": "^2.5.0"
-    }
+  "name": "infra",
+  "main": "index.ts",
+  "devDependencies": {
+    "@types/node": "^18",
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "preview": "pulumi preview",
+    "up": "pulumi up",
+    "destroy": "pulumi destroy"
+  },
+  "packageManager": "pnpm@8.9.0",
+  "dependencies": {
+    "@pulumi/pulumi": "^3.106.0",
+    "@pulumi/aws": "^6.22.2",
+    "@pulumi/awsx": "^2.5.0"
+  }
 }

@@ -30,11 +30,11 @@ const certificateValidation = new aws.acm.CertificateValidation(
   },
 );
 
-const vpc = new awsx.ec2.Vpc("main-vpc", {
-  cidrBlock: "10.0.0.0/16",
-  subnetSpecs: [
-    {
-      type: "Public",
-    },
-  ],
-});
+// const vpc = new awsx.ec2.Vpc("main-vpc", {
+//   cidrBlock: "10.0.0.0/16",
+//   subnetSpecs: [
+//     {
+//       type: "Public",
+//     },
+//   ],
+// });

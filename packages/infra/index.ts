@@ -140,6 +140,7 @@ const httpsListener = alb.createListener("https", {
 
 const appService = new awsx.classic.ecs.FargateService("app-svc", {
   cluster,
+  enableExecuteCommand: true,
   taskDefinitionArgs: {
     container: {
       portMappings: [targetGroup],

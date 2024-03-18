@@ -92,65 +92,65 @@ const certificateValidation = new aws.acm.CertificateValidation(
 //   ],
 // });
 
-const repo = new awsx.ecr.Repository("repo", {
-  forceDelete: true,
-});
+// const repo = new awsx.ecr.Repository("repo", {
+//   forceDelete: true,
+// });
 
-// Build and publish our application's container image from ./app to the ECR repository.
-const image = new awsx.ecr.Image("image", {
-  repositoryUrl: repo.url,
-  dockerfile: "./Dockerfile",
-  context: "../../",
-  args: {
-    NODE_ENV: "production",
-    PROJECT: "nitro",
-  },
-  builderVersion: "BuilderBuildKit",
-});
+// // Build and publish our application's container image from ./app to the ECR repository.
+// const image = new awsx.ecr.Image("image", {
+//   repositoryUrl: repo.url,
+//   dockerfile: "./Dockerfile",
+//   context: "../../",
+//   args: {
+//     NODE_ENV: "production",
+//     PROJECT: "nitro",
+//   },
+//   builderVersion: "BuilderBuildKit",
+// });
 
-const cluster = new awsx.classic.ecs.Cluster("cluster");
+// const cluster = new awsx.classic.ecs.Cluster("cluster");
 
-const alb = new awsx.classic.lb.ApplicationLoadBalancer("net-lb", {
-  external: true,
-  securityGroups: cluster.securityGroups,
-});
+// const alb = new awsx.classic.lb.ApplicationLoadBalancer("net-lb", {
+//   external: true,
+//   securityGroups: cluster.securityGroups,
+// });
 
-const targetGroup = alb.createTargetGroup("targetGroup", {
-  port: 3000,
-  protocol: "HTTP",
-  healthCheck: {
-    path: "/health",
-    port: "3000",
-    protocol: "HTTP",
-  },
-});
-const httpListener = alb.createListener("http", {
-  port: 80,
-  external: true,
-  targetGroup: targetGroup,
-});
-const httpsListener = alb.createListener("https", {
-  port: 443,
-  external: true,
-  certificateArn: appCertificate.arn,
-  protocol: "HTTPS",
-  sslPolicy: "ELBSecurityPolicy-TLS13-1-2-2021-06",
-  targetGroup: targetGroup,
-});
+// const targetGroup = alb.createTargetGroup("targetGroup", {
+//   port: 3000,
+//   protocol: "HTTP",
+//   healthCheck: {
+//     path: "/health",
+//     port: "3000",
+//     protocol: "HTTP",
+//   },
+// });
+// const httpListener = alb.createListener("http", {
+//   port: 80,
+//   external: true,
+//   targetGroup: targetGroup,
+// });
+// const httpsListener = alb.createListener("https", {
+//   port: 443,
+//   external: true,
+//   certificateArn: appCertificate.arn,
+//   protocol: "HTTPS",
+//   sslPolicy: "ELBSecurityPolicy-TLS13-1-2-2021-06",
+//   targetGroup: targetGroup,
+// });
 
-const appService = new awsx.classic.ecs.FargateService("app-svc", {
-  cluster,
-  enableExecuteCommand: true,
-  taskDefinitionArgs: {
-    container: {
-      portMappings: [targetGroup],
-      image: image.imageUri,
-      cpu: 128 /*10% of 1024*/,
-      memory: 256 /*MB*/,
-      linuxParameters: {
-        initProcessEnabled: true,
-      },
-    },
-  },
-  desiredCount: 1,
-});
+// const appService = new awsx.classic.ecs.FargateService("app-svc", {
+//   cluster,
+//   enableExecuteCommand: true,
+//   taskDefinitionArgs: {
+//     container: {
+//       portMappings: [targetGroup],
+//       image: image.imageUri,
+//       cpu: 128 /*10% of 1024*/,
+//       memory: 256 /*MB*/,
+//       linuxParameters: {
+//         initProcessEnabled: true,
+//       },
+//     },
+//   },
+//   desiredCount: 1,
+// });

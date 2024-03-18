@@ -146,6 +146,9 @@ const appService = new awsx.classic.ecs.FargateService("app-svc", {
       image: image.imageUri,
       cpu: 128 /*10% of 1024*/,
       memory: 256 /*MB*/,
+      linuxParameters: {
+        initProcessEnabled: true,
+      },
     },
   },
   desiredCount: 1,
